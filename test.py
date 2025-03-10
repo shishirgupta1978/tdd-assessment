@@ -23,6 +23,11 @@ class TestStringCalculator(unittest.TestCase):
         result = calculator.add("1\n2,3")
         self.assertEqual(result, 6)
 
+    def test_custom_delimiter_string(self):
+        calculator = StringCalculator()
+        result = calculator.add("//;\n1;2")
+        self.assertEqual(result, 3)
+
 
 
 
