@@ -18,7 +18,7 @@ class StringCalculator:
             num = int(num)
             if num < 0:
                 negatives.append(num)
-            else:
+            elif num <= 1000:
                 total += num
         
         if negatives:
@@ -38,5 +38,5 @@ if __name__==   "__main__":
     print(calculator.add("1,5"))
     print(calculator.add("1\n2,3"))
     print(calculator.add("//;\n1;2"))
+    print(calculator.add("2,1001"))
     print(calculator.add("1,-2,3"))
-    
