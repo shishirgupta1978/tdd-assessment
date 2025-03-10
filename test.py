@@ -39,7 +39,20 @@ class TestStringCalculator(unittest.TestCase):
         result = calculator.add("2,1001")
         self.assertEqual(result, 2)
 
+    def test_any_length_delimiter_numbers(self):
+        calculator = StringCalculator()
+        result = calculator.add("//[***]\n1***2***3")
+        self.assertEqual(result, 6)
 
+    def test_multiple_delimiter_numbers(self):
+        calculator = StringCalculator()
+        result = calculator.add("//[*][%]\n1*2%3")
+        self.assertEqual(result, 6)
+
+    def test_multiple_delimiter_with_length_longer_than_one_char_numbers(self):
+        calculator = StringCalculator()
+        result = calculator.add("//[**][%%]\n1**2%%3%%4")
+        self.assertEqual(result, 10)
 
 
 

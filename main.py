@@ -1,3 +1,5 @@
+import re
+
 class StringCalculator:
     def add(self, numbers):
         if numbers == "":
@@ -6,8 +8,16 @@ class StringCalculator:
         if numbers.startswith("//"): # If the string starts with a custom delimiter
             end = numbers.find("\n")
             delimiter = numbers[2:end]
+            delimiters = re.findall(r'\[(.*?)\]', delimiter)
+
+
+
             numbers = numbers[end + 1:]
-            num_list = numbers.split(delimiter)
+            if delimiters:
+                delimiter_pattern = "|".join(map(re.escape, delimiters))
+                num_list = re.split(delimiter_pattern, numbers)
+            else:
+                num_list = numbers.split(delimiter)
         else:
             numbers = numbers.replace("\n", ",") # Replace new lines with commas
             num_list = numbers.split(",")
@@ -39,4 +49,7 @@ if __name__==   "__main__":
     print(calculator.add("1\n2,3"))
     print(calculator.add("//;\n1;2"))
     print(calculator.add("2,1001"))
-    print(calculator.add("1,-2,3"))
+    print(calculator.add("//[***]\n1***2***3"))
+    print(calculator.add("//[*][%]\n1*2%3"))
+    print(calculator.add("//[**][%%]\n1**2%%3%%4"))
+    #print(calculator.add("1,-2,3"))
