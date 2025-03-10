@@ -11,7 +11,21 @@ class StringCalculator:
         else:
             numbers = numbers.replace("\n", ",") # Replace new lines with commas
             num_list = numbers.split(",")
-        return sum([int(num) for num in num_list])
+
+        negatives = []
+        total = 0
+        for num in num_list:
+            num = int(num)
+            if num < 0:
+                negatives.append(num)
+            else:
+                total += num
+        
+        if negatives:
+            raise ValueError(f"negatives not allowed: {', '.join(map(str, negatives))}")
+        
+        return total
+
 
 
 
@@ -24,4 +38,5 @@ if __name__==   "__main__":
     print(calculator.add("1,5"))
     print(calculator.add("1\n2,3"))
     print(calculator.add("//;\n1;2"))
+    print(calculator.add("1,-2,3"))
     
